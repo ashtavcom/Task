@@ -2,16 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CubeManager : MonoBehaviour
 {
     public Action OnPauseClicked;
     public GameObject cubePrefab;
 
+    public Button spawnBtn;
+    public Button pauseBtn;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        spawnBtn.onClick.AddListener(OnCubeSpawn);
+        pauseBtn.onClick.AddListener(OnCubePause);
     }
 
     public void SpawnCube()
@@ -34,4 +39,15 @@ public class CubeManager : MonoBehaviour
             OnPauseClicked();
         }
     }
+
+    void OnCubeSpawn()
+    {
+        SpawnCube();
+    }
+
+    void OnCubePause()
+    {
+        OnPauseClicked();
+    }
+        
 }
