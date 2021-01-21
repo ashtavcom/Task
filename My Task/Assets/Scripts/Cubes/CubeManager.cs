@@ -9,16 +9,6 @@ public class CubeManager : MonoBehaviour
     public Action OnPauseClicked;
     public GameObject cubePrefab;
 
-    public Button spawnBtn;
-    public Button pauseBtn;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        spawnBtn.onClick.AddListener(OnCubeSpawn);
-        pauseBtn.onClick.AddListener(OnCubePause);
-    }
-
     public void SpawnCube()
     {
         GameObject cube = GameObject.Instantiate(cubePrefab, transform.position, transform.rotation);
@@ -40,12 +30,12 @@ public class CubeManager : MonoBehaviour
         }
     }
 
-    void OnCubeSpawn()
+    public void OnCubeSpawn()
     {
         SpawnCube();
     }
 
-    void OnCubePause()
+    public void OnCubePause()
     {
         OnPauseClicked();
     }

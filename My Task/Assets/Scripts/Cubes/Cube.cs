@@ -4,26 +4,39 @@ using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
-    bool repeatSequence;
     bool stopMovement;
     bool isPaused;
 
-    string previousPoint;
+    public Transform sphere1;
+    public Transform sphere2;
+    public Transform sphere3;
 
-    Vector3 pointA = new Vector3(-2, 0, -6);
-    Vector3 pointB = new Vector3(2, 0, -6);
-    Vector3 pointC = new Vector3(0, 0, 0);
+    public float speed;
 
+    int positionIndex;
     Vector3 targetPosition;
+    Vector3 lastPosition;
+    readonly List<Transform> sphereList = new List<Transform>();
+
+    // define the cube movement order here
+    int[] pathOrder = {0, 1, 2, 1};
 
     // Start is called before the first frame update
     void Start()
     {
-        previousPoint = "a";
-        repeatSequence = false;
         stopMovement = false;
-        targetPosition = pointB;
         isPaused = false;
+
+        sphere1 = GameObject.Find("sphere1").transform;
+        sphere2 = GameObject.Find("sphere2").transform;
+        sphere3 = GameObject.Find("sphere3").transform;
+
+        sphereList.Add(sphere1);
+        sphereList.Add(sphere2);
+        sphereList.Add(sphere3);
+
+        positionIndex++;
+        speed = 3;
     }
 
     // Update is called once per frame
@@ -31,45 +44,39 @@ public class Cube : MonoBehaviour
     {
         if (!stopMovement && !isPaused)
         {
-            MoveToTarget();
             CheckPosition();
+            MoveToTarget();
         }
     }
 
     void MoveToTarget()
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * 3);
+        targetPosition = sphereList[pathOrder[positionIndex]].position;
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * speed);
     }
 
     void CheckPosition()
     {
-        if (transform.position == pointB)
+        if (transform.position == targetPosition)
         {
-            if(previousPoint == "a")
+            // update target position
+            positionIndex++;
+            if (positionIndex >= pathOrder.Length)
             {
-                targetPosition = pointC;
+                positionIndex = 0;
             }
-            else if(previousPoint == "c")
+
+            // if the cube is at point b then pause
+            if (pathOrder[positionIndex] != 1)
             {
-                targetPosition = pointA;
+                StartCoroutine(EnableMovement());
             }
-            stopMovement = true;
-            StartCoroutine(EnableMovement());
-        }
-        else if (transform.position == pointC)
-        {
-            targetPosition = pointB;
-            previousPoint = "c";
-        }
-        else if(transform.position == pointA)
-        {
-            targetPosition = pointB;
-            previousPoint = "a";
         }
     }
 
     IEnumerator EnableMovement()
     {
+        stopMovement = true;
         yield return new WaitForSeconds(3);
         stopMovement = false;
     }

@@ -152,8 +152,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cubePrefab: {fileID: 5657101066369063422, guid: 31a673fc173a1cb4fa5e56299e397460,
     type: 3}
-  spawnBtn: {fileID: 1956775170}
-  pauseBtn: {fileID: 1132525103}
 --- !u!4 &32768872
 Transform:
   m_ObjectHideFlags: 0
@@ -336,7 +334,7 @@ GameObject:
   - component: {fileID: 202734498}
   - component: {fileID: 202734497}
   m_Layer: 0
-  m_Name: pointb
+  m_Name: sphere2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -429,7 +427,7 @@ GameObject:
   - component: {fileID: 594602647}
   - component: {fileID: 594602646}
   m_Layer: 0
-  m_Name: pointa
+  m_Name: sphere1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -920,7 +918,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1132525104}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 32768871}
+        m_MethodName: OnCubePause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1132525104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1204,7 +1213,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1956775171}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 32768871}
+        m_MethodName: SpawnCube
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1956775171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1254,7 +1274,7 @@ GameObject:
   - component: {fileID: 2003744584}
   - component: {fileID: 2003744583}
   m_Layer: 0
-  m_Name: pointc
+  m_Name: sphere3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
