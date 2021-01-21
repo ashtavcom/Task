@@ -8,12 +8,26 @@ public class CubeManager : MonoBehaviour
 {
     public Action OnPauseClicked;
     public GameObject cubePrefab;
+    bool isPaused;
+    bool cubeSpawned;
+    Transform sphere1;
+
+    private void Start()
+    {
+        isPaused = false;
+        cubeSpawned = false;
+        sphere1 = GameObject.Find("sphere1").transform;
+    }
 
     public void SpawnCube()
     {
-        GameObject cube = GameObject.Instantiate(cubePrefab, transform.position, transform.rotation);
-        cube.transform.position = new Vector3(-2, 0, -6);
-        OnPauseClicked += cube.GetComponent<Cube>().OnPausePressed;
+        if(!isPaused)
+        {
+            GameObject cube = GameObject.Instantiate(cubePrefab, transform.position, transform.rotation);
+            cube.transform.position = sphere1.position;
+            OnPauseClicked += cube.GetComponent<Cube>().OnPausePressed;
+            cubeSpawned = true;
+        }
     }
 
     // Update is called once per frame
@@ -37,7 +51,11 @@ public class CubeManager : MonoBehaviour
 
     public void OnCubePause()
     {
-        OnPauseClicked();
+        OnPauseClicked?.Invoke();
+        if (cubeSpawned)
+        {
+            isPaused = !isPaused;
+        }
     }
         
 }

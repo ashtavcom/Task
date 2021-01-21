@@ -20,6 +20,8 @@ public class ReturnNameTest
     {
         var rnf = go.GetComponent<ReturnNameFunction>();
 
-        rnf.ReturnNameAndCurrentTime(go);        
+        string str = rnf.ReturnNameAndCurrentDate(go);
+
+        Assert.NotNull(str, "We got the name and time.");
     }
 }

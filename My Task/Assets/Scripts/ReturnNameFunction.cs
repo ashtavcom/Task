@@ -5,11 +5,12 @@ using System;
 
 public class ReturnNameFunction : MonoBehaviour
 {
-
-    public void ReturnNameAndCurrentTime(GameObject go)
+    /*Function that returns name of gameobject with date appended to it.*/
+    public string ReturnNameAndCurrentDate(GameObject go)
     {
-        string s = go.name;
+        string str = go.name;
         string dt = DateTime.UtcNow.Date.ToShortDateString();
-        Debug.Log("Name: " + s + "\t" + "Current UTC Date: " + dt);
+        str += "\t" + dt;
+        return str;
     }
 }
